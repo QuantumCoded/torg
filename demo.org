@@ -1,0 +1,20 @@
+Leading text
+
+* Here's a headline
+  SCHEDULED: <2021-07-31 Sat>
+
+  text
+
+** And a subheadline
+   DEADLINE: <2021-07-20 Tue>
+
+   moar text
+
+** And a non-scheduled headline
+
+   and more text
+
+* Scheduled & deadline
+  DEADLINE: <2021-07-10 Sat> SCHEDULED: <2021-07-10 Sat>
+
+  and even more text!!!
