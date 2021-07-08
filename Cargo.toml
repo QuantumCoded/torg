@@ -8,5 +8,9 @@ edition = "2018"
 
 [dependencies]
 crossterm = "0.20.0"
-orgize = "0.8.4"
 tui = { version = "0.15.0", default-features = false, features = ['crossterm'] }
+
+# orgize = "0.8.4"
+# We need https://github.com/PoiScript/orgize/pull/32, which hasn't
+# been merged yet. In the meantime, use a custom fork.
+orgize = { git = "https://github.com/AlexBethel/orgize" }
