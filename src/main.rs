@@ -1,3 +1,5 @@
+mod app;
+
 use orgize::Org;
 
 use std::io;
