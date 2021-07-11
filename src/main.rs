@@ -2,7 +2,7 @@ mod app;
 
 use orgize::Org;
 
-use std::{io,fs};
+use std::{fs, io};
 use tui::backend::CrosstermBackend;
 use tui::layout::{Constraint, Direction, Layout};
 use tui::widgets::*;
