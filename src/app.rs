@@ -3,6 +3,7 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
+use chrono::{Datelike, IsoWeek, NaiveDate};
 use orgize::Org;
 
 pub struct App<'a> {
@@ -16,7 +17,7 @@ pub struct App<'a> {
 
     /// The (year, week number) selected in the agenda view on the
     /// upper-right.
-    week: (i32, u32),
+    week: IsoWeek,
 
     /// The (year, month) of the first month visible in the calendar
     /// view in the lower-right.
@@ -64,7 +65,7 @@ impl<'a> App<'a> {
         Self {
             org_files: files,
             selected_file: 0,
-            week: (0, 0),
+            week: NaiveDate::from_yo(0, 0).iso_week(),
             calendar_month: (0, 0),
         }
     }
