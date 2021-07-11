@@ -2,7 +2,7 @@ mod app;
 
 use orgize::Org;
 
-use std::io;
+use std::{io,fs};
 use tui::backend::CrosstermBackend;
 use tui::layout::{Constraint, Direction, Layout};
 use tui::widgets::*;
@@ -15,7 +15,7 @@ fn main() -> io::Result<()> {
 
     terminal.clear()?;
 
-    let mut org_text_buf = std::fs::read_to_string("demo.org").unwrap();
+    let mut org_text_buf = fs::read_to_string("demo.org").unwrap();
     let mut agenda_text_buf = String::new();
 
     loop {
@@ -39,7 +39,7 @@ fn main() -> io::Result<()> {
             let calendar_block = Block::default().title("calendar").borders(Borders::ALL);
 
             let file_list = List::new(
-                std::fs::read_dir(".")
+                fs::read_dir(".")
                     .unwrap()
                     .filter_map(|dir| {
                         if let Ok(entry) = dir {

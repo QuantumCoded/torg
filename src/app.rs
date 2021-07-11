@@ -1,5 +1,6 @@
 //! User interface state.
 
+use std::fs;
 use std::path::{Path, PathBuf};
 
 use orgize::Org;
@@ -39,7 +40,7 @@ impl<'a> App<'a> {
         let files = files
             .iter()
             .filter_map(|filename| {
-                let contents = match std::fs::read_to_string(filename) {
+                let contents = match fs::read_to_string(filename) {
                     Ok(value) => value,
                     Err(err) => {
                         println!(
