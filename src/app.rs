@@ -2,7 +2,7 @@
 
 use std::path::PathBuf;
 
-use orgize::elements::Planning;
+use orgize::Org;
 
 pub struct App<'a> {
     /// The set of all Org files that have been loaded.
@@ -31,15 +31,5 @@ pub struct OrgFile<'a> {
     contents: String,
 
     /// The set of scheduled events parsed from the file's contents.
-    events: Vec<Event<'a>>,
-}
-
-/// An event that appears on the calendar, i.e., an Org headline with
-/// an attached "SCHEDULED", "DEADLINE", or "CLOSED" line.
-pub struct Event<'a> {
-    /// Name of the event, i.e. the text of the headline.
-    name: String,
-
-    /// The scheduled times for the event.
-    planning: Planning<'a>,
+    parsed: Org<'a>,
 }
