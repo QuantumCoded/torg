@@ -7,6 +7,7 @@ use tui::backend::CrosstermBackend;
 use tui::layout::{Constraint, Direction, Layout};
 use tui::widgets::*;
 use tui::Terminal;
+
 fn main() -> io::Result<()> {
     let stdout = io::stdout();
     let backend = CrosstermBackend::new(stdout);
