@@ -2,7 +2,7 @@
 
 use std::path::{Path, PathBuf};
 
-use chrono::IsoWeek;
+use chrono::{Datelike, IsoWeek, NaiveDate};
 use orgize::Org;
 
 pub struct App<'a> {
@@ -64,7 +64,7 @@ impl<'a> App<'a> {
         Self {
             org_files: files,
             selected_file: 0,
-            week: (0, 0),
+            week: NaiveDate::from_yo(0, 0).iso_week(),
             calendar_month: (0, 0),
         }
     }
