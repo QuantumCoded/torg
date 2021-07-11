@@ -45,4 +45,7 @@ pub struct Event {
 
     /// Amount of time until the event repeats, if indeed it repeats.
     repeat: Option<Duration>,
+    
+    /// Amount of time before deadline to warn, if there is a warning period.
+    warning: Option<Duration>,
 }
