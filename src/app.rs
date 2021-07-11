@@ -1,6 +1,6 @@
 //! User interface state.
 
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use orgize::Org;
 
@@ -32,4 +32,39 @@ pub struct OrgFile<'a> {
 
     /// The set of scheduled events parsed from the file's contents.
     parsed: Org<'a>,
+}
+
+impl<'a> App<'a> {
+    pub fn new(files: &[impl AsRef<Path>]) -> Self {
+        let files = files
+            .iter()
+            .filter_map(|filename| {
+                let contents = match std::fs::read_to_string(filename) {
+                    Ok(value) => value,
+                    Err(err) => {
+                        println!(
+                            "Failed to load file {}: {}",
+                            filename.as_ref().to_string_lossy(),
+                            err
+                        );
+                        return None;
+                    }
+                };
+                let parsed = Org::parse_string(contents.to_owned());
+
+                Some(OrgFile {
+                    filename: filename.as_ref().to_owned(),
+                    contents,
+                    parsed,
+                })
+            })
+            .collect();
+
+        Self {
+            org_files: files,
+            selected_file: 0,
+            week: (0, 0),
+            calendar_month: (0, 0),
+        }
+    }
 }
