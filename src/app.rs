@@ -2,6 +2,7 @@
 
 use std::path::{Path, PathBuf};
 
+use chrono::IsoWeek;
 use orgize::Org;
 
 pub struct App<'a> {
@@ -15,7 +16,7 @@ pub struct App<'a> {
 
     /// The (year, week number) selected in the agenda view on the
     /// upper-right.
-    week: (i32, u32),
+    week: IsoWeek,
 
     /// The (year, month) of the first month visible in the calendar
     /// view in the lower-right.
