@@ -2,11 +2,11 @@
 
 use std::path::PathBuf;
 
-use chrono::{Duration, NaiveTime};
+use orgize::elements::Planning;
 
-pub struct App {
+pub struct App<'a> {
     /// The set of all Org files that have been loaded.
-    org_files: Vec<OrgFile>,
+    org_files: Vec<OrgFile<'a>>,
 
     /// The index in `org_files` of the particular Org file that's
     /// highlighted in the lower-left pane, and whose contents are
@@ -23,7 +23,7 @@ pub struct App {
 }
 
 /// An Org file that has been opened and parsed.
-pub struct OrgFile {
+pub struct OrgFile<'a> {
     /// The name of the file on disk where this Org file resides.
     filename: PathBuf,
 
@@ -31,21 +31,15 @@ pub struct OrgFile {
     contents: String,
 
     /// The set of scheduled events parsed from the file's contents.
-    events: Vec<Event>,
+    events: Vec<Event<'a>>,
 }
 
 /// An event that appears on the calendar, i.e., an Org headline with
 /// an attached "SCHEDULED", "DEADLINE", or "CLOSED" line.
-pub struct Event {
+pub struct Event<'a> {
     /// Name of the event, i.e. the text of the headline.
     name: String,
 
-    /// The date and time of the event's first occurrence.
-    time: NaiveTime,
-
-    /// Amount of time until the event repeats, if indeed it repeats.
-    repeat: Option<Duration>,
-    
-    /// Amount of time before deadline to warn, if there is a warning period.
-    warning: Option<Duration>,
+    /// The scheduled times for the event.
+    planning: Planning<'a>,
 }
