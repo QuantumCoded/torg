@@ -3,7 +3,7 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use chrono::{Datelike, IsoWeek, NaiveDate};
+use chrono::{Datelike, IsoWeek, Local, NaiveDate};
 use orgize::Org;
 
 pub struct App<'a> {
@@ -62,11 +62,12 @@ impl<'a> App<'a> {
             })
             .collect();
 
+        let now = Local::now();
         Self {
             org_files: files,
             selected_file: 0,
-            week: NaiveDate::from_yo(0, 0).iso_week(),
-            calendar_month: (0, 0),
+            week: now.iso_week(),
+            calendar_month: (now.year(), now.month()),
         }
     }
 }
