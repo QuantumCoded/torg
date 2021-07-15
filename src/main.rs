@@ -2,7 +2,7 @@ mod app;
 
 use app::App;
 
-use std::io;
+use std::{io, thread::sleep, time::Duration};
 use tui::{backend::CrosstermBackend, Terminal};
 
 fn main() -> io::Result<()> {
@@ -15,5 +15,6 @@ fn main() -> io::Result<()> {
     let mut app = App::new(".", terminal).unwrap();
     loop {
         app.draw()?;
+        sleep(Duration::from_secs_f64(1.0 / 10.0));
     }
 }
