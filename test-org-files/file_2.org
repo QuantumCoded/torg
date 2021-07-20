@@ -4,7 +4,7 @@ some are after; =torg= should sort them all correctly in the agenda
 view.
 
 * Foo
-  SCHEDULED: <2021-06-31 Sat>
+  SCHEDULED: <2021-06-30 Sat>
 
 ** Bar
    DEADLINE: <2021-08-20 Tue>
