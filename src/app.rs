@@ -149,63 +149,14 @@ impl Display for AgendaElement {
 impl AgendaElement {
     fn from_timestamp(timestamp: &Timestamp, name: &str) -> Vec<Self> {
         match timestamp {
-            Timestamp::Active {
-                start,
-                repeater: _,
-                delay: _,
-            } => {
+            Timestamp::Active { start, .. }
+            | Timestamp::Inactive { start, .. }
+            | Timestamp::ActiveRange { start, .. }
+            | Timestamp::InactiveRange { start, .. } => {
                 vec![Self {
                     time: start.into(),
-                    name: name.to_owned(),
+                    name: name.to_string(),
                 }]
-            }
-            Timestamp::Inactive {
-                start,
-                repeater: _,
-                delay: _,
-            } => {
-                vec![Self {
-                    time: start.into(),
-                    name: name.to_owned(),
-                }]
-            }
-            Timestamp::ActiveRange {
-                start,
-                end,
-                start_repeater: _,
-                end_repeater: _,
-                start_delay: _,
-                end_delay: _,
-            } => {
-                vec![
-                    Self {
-                        time: start.into(),
-                        name: name.to_owned(),
-                    },
-                    Self {
-                        time: end.into(),
-                        name: name.to_owned(),
-                    },
-                ]
-            }
-            Timestamp::InactiveRange {
-                start,
-                end,
-                start_repeater: _,
-                end_repeater: _,
-                start_delay: _,
-                end_delay: _,
-            } => {
-                vec![
-                    Self {
-                        time: start.into(),
-                        name: name.to_owned(),
-                    },
-                    Self {
-                        time: end.into(),
-                        name: name.to_owned(),
-                    },
-                ]
             }
             Timestamp::Diary { value: _ } => todo!(),
         }
